@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+    <link rel="stylesheet" href="../../commonCss/bootstrap.min.css">
+</head>
+<body>
+<div>
+    在 <span class="text-danger">componentDidMount</span> 时加载数据。当加载成功，将数据存储在 state 中，触发 render 来更新你的 UI。当执行异步请求的响应时，在更新 state 前， 一定要先通过 this.isMounted() 来检测组件的状态是否还是 mounted。
+</div>
+<div id="example"></div>
+<script type="text/babel">
+    var UserGist = React.createClass({
+        getInitialState: function() {
+            return {
+                username: '',
+                lastGistUrl: ''
+            };
+        },
+
+        componentDidMount: function() {
+            console.log(this)
+            $.get(this.props.source, function(result) {
+                var lastGist = result[0];
+                //如果组件渲染到了 DOM 中，isMounted() 返回 true。可以使用该方法保证 setState() 和 forceUpdate() 在异步场景下的调用不会出错。
+                //personal：this是指componentDidMount的this，而不是get里面的this，所以如果去掉bind（this）会出现this.isMounted is not a function
+                console.log(this)
+                if (this.isMounted()) {
+
+                    this.setState({
+                        username: lastGist.owner.login,
+                        lastGistUrl: lastGist.html_url
+                    });
+                }
+            }.bind(this));
+        },
+
+        render: function() {
+            return (
+                    <div>
+                        {this.state.username}'s last gist is
+                        <a href={this.state.lastGistUrl}>here</a>.
+                    </div>
+            );
+        }
+    });
+    ReactDOM.render(
+            <UserGist source="https://api.github.com/users/octocat/gists" />,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+</head>
+<body>
+<p>React最主要的就是ReactElement，有type、ref、props和key四个属性，没有方法。</p>
+<div id="example1"></div>
+<script type="text/babel">
+
+    var ListItemWrapper = React.createClass({
+        render: function () {
+            return <li>{this.props.data.text}</li>;
+        }
+    });
+    var MyComponent = React.createClass({
+        render: function () {
+            return (
+                    <ul>
+                        {this.props.results.map(function (result) {
+                            return <ListItemWrapper key={result.id} data={result}/>;
+                        })}
+                    </ul>
+            );
+        }
+    });
+    var results = [
+        {text: 'one', id:1},
+        {text: 'two', id:2},
+        {text: 'three', id:3},
+        {text: 'four', id:4},
+        {text: 'five', id:5},
+        {text: 'six', id:6}
+    ];
+    ReactDOM.render(
+            <MyComponent results={results}/>,
+            document.getElementById('example1')
+    );
+</script>
+</body>
+</html>

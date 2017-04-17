@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <input v-model="newTodo" v-on:keyup.enter="addTodo">
+    <ul>
+        <!--  <li v-for="todo in todos">-->
+      <!--  <li v-for="todo in todos|filterBy 'm' ">-->
+        <li v-for="todo in todos|limitBy 2 1 "><!--只显示两条，从第一条开始，也就是1-3条信息-->
+            <span>{{todo.text}}</span>
+            <!--same as :<span v-text="todo.text"></span>-->
+            <button v-on:click="removeTodo($index)">X</button>
+            <button v-on:click="reTodo(todo)">X简便</button>
+        </li>
+    </ul>
+    <hr>
+    <input v-model="nValue" v-on:keyup.enter="addTodo">
+    <ul>
+        <li v-for="t in msgs|filterBy nValue in ">
+            <span>{{t.name}}</span>
+            <button v-on:click="reTod(t)">X简便</button>
+        </li>
+    </ul>
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            msg: "hello",
+            newTodo: "",
+            nValue: "",
+            todos: [
+                {text: 'Add some todos'},
+                {text: 'first message'},
+                {text: 'today is a raining day'},
+                {text: "How are you?I'm fine,thank you,and you?"},
+            ],
+            msgs: [
+                { name: 'Bruce' ,tel:123345},
+                { name: 'Chuck' ,tel:567869},
+                { name: 'Jackie',tel:690028 }
+            ]
+        },
+        methods: {
+            addTodo: function () {
+                var text = this.newTodo.trim();
+                if (text) {
+                    this.todos.push({text: text});
+                    this.newTodo = "";
+                }
+            },
+//            removeTodo:function (index) {
+//                this.todos.splice(index,1)
+//            },
+            //简便方法用$remove
+            reTodo: function (todo) {
+                this.todos.$remove(todo)
+            },
+            reTod: function (t) {
+                this.msgs.$remove(t)
+            }
+        }
+    })
+    //vm.todos[2]={"text":"hello"}
+    // vm.todos.$set(2,{"text":"hello"});//触发试图更新
+
+</script>
+</body>
+</html>

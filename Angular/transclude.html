@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <script src="http://cdn.staticfile.org/angular.js/1.2.10/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller='MainController'>
+    <div class='a'>
+        <p>china</p>
+        <hello-world>
+            {{name}}
+        </hello-world>
+    </div>
+</div>
+
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('MainController',function($scope){
+        $scope.name = 'leifeng';
+    });
+    app.directive('helloWorld',function(){
+        return {
+            scope:{},
+            restrict: 'AE',
+            //transclude: true,
+            transclude: 'element',
+            replace:true,
+            template: '<div class="b"><div ng-transclude>你看不见我</div></div>'
+        }
+    });
+</script>
+
+</body>
+</html>

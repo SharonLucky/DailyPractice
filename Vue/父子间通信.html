@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="vue.js"></script>
+</head>
+<body>
+<template id="child-template">
+    <input v-model="msg">
+    <button v-on:click="notify">dispatch</button>
+</template>
+
+<div id="parent-template">
+    <p>message:{{message|json}}</p>
+    <child v-on:child-dis="child"></child>
+</div>
+<script>
+    Vue.component("child", {
+        template: "#child-template",
+        data: function () {
+            return {msg: "hello"}
+        },
+        methods: {
+            notify: function () {
+                if (this.msg.trim()) {
+                    this.$dispatch("child-dis", this.msg);
+                    this.msg = ""
+                }
+            }
+        }
+    })
+
+    new Vue({
+        el: "#parent-template",
+        data: {
+            message: []
+        },
+        //add
+        methods:{
+            child: function (msg) {
+                this.message.push(msg)
+            }
+        },
+//        events: {
+//            'child-dis': function (msg) {
+//                this.message.push(msg)
+//            }
+//        }
+    })
+</script>
+</body>
+</html>

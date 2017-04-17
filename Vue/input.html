@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+    <style>
+        /* 必需 */
+        .expand-transition {
+            transition: all .3s ease;
+            height: 30px;
+            padding: 10px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+
+        /* .expand-enter 定义进入的开始状态 */
+        /* .expand-leave 定义离开的结束状态 */
+        .expand-enter, .expand-leave {
+            height: 0;
+            padding: 0 10px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="checkbox" id="tom" value="tom" v-model="checkName">
+    <label for="tom">Tom</label>
+    <input type="checkbox" id="jack" value="Jack" v-model="checkName">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkName">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkName">
+    <label for="mike">Mike</label>
+    <hr>
+    <p>Checked names: {{ checkName|json}}</p>
+
+    <select v-model="selected">
+        <option v-for="option in options" v-bind:value="option.value">
+            {{option.text}}
+        </option>
+    </select>
+    <span>{{selected}}</span>
+    <hr>
+
+    <div v-if="show" transition="expand">hello Gilr</div>
+    <button type="button" v-on:click="showDiv">显示div</button>
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            show:false,
+            checkName:[],
+            selected: 'A',
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ]
+        },
+        methods:{
+            showDiv:function(){
+               this.show=!this.show
+            }
+        }
+    })
+</script>
+</body>
+</html>

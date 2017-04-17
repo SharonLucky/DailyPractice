@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="vue.js"></script>
+</head>
+<body>
+<script>
+    var myMixin={
+        created:function () {
+            this.hello();
+        },
+        methods:{
+            hello:function () {
+                console.log("hello Mixin!!")
+            },
+            foo: function () {
+                console.log('foo')
+            },
+            conflicting: function () {
+                console.log('from mixin')
+            }
+
+        }
+    }
+
+    //定义一个组件使用这个mixin
+    var component=new Vue({
+        mixins:[myMixin],
+        created:function () {
+            //混合对象和组件包含同名选项时，会采取适当的策略合并。先调用mixin再调组件
+            console.log("我是组件的created~")
+        },
+        methods:{
+            bar: function () {
+                console.log('bar')
+            },
+            conflicting: function () {
+                console.log('from self')
+            }
+        }
+    })
+    //var component=new Component();
+    component.foo(); //foo
+    component.bar(); //bar
+    //值为对象的选项，如 methods, components 和 directives 将合并到同一个对象内。如果键冲突则组件的选项优先。
+    component.conflicting(); // -> "from self"
+</script>
+</body>
+</html>

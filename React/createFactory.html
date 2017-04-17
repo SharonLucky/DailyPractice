@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+
+  //var child1 = React.createElement('li', null, 'First Text Content');
+  //var child2 = React.createElement('li', null, 'Second Text Content');
+  //var root = React.createElement('ul', { className: 'my-list' }, child1, child2);
+
+  /*用createFactory方法修改, type参数为html标签名字*/
+  //var factory=React.createFactory("li");
+  //var child1 = factory( null, 'First Text Content');
+ // var child2 = factory( null, 'Second Text Content');
+  //var root = React.createElement('ul', { className: 'my-list' }, child1, child2);
+
+
+
+  /* type参数为ReactClass*/
+  var cli=React.createClass({
+    render:function () {
+      return(
+        <li>{this.props.text}</li>
+      )
+    }
+  })
+  var factory=React.createFactory(cli);
+  var child1 = factory({text:'First Text Content'});
+  var child2 = factory({text:'Second Text Content'});
+  var root=React.DOM.ul({className:'my-list'},child1,child2);
+
+  ReactDOM.render(root, document.getElementById('example'));
+</script>
+</body>
+</html>

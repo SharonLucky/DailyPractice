@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #topEle{
+            border:1px solid darkgray;
+            height:600px;
+            width:600px;
+        }
+        #topEle2{
+            border:1px solid salmon;
+            height:700px;
+            width:700px;
+        }
+        .title{
+            border:1px solid lightgreen;
+            height:300px;
+        }
+    </style>
+</head>
+<body>
+<div id="topEle">11111</div>
+<div class="title" id="title1">小内容1</div>
+<div class="title" id="title2">小内容2</div>
+<div class="title" id="title3">小内容3</div>
+<div id="topEle2">222</div>
+<input type="button" value="jump" id="but">
+<script>
+    var element = document.getElementById("title2");
+    var but = document.getElementById("but");
+    but.onclick=function () {
+      //  element.scrollIntoView();
+      //  element.scrollIntoView(false);
+      //  element.scrollIntoView({block: "end"});
+        element.scrollIntoView({block: "start"});
+    }
+
+</script>
+</body>
+</html>

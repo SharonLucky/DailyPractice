@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <!--<link rel="stylesheet" href="../../commonCss/bootstrap.min.css">-->
+</head>
+<body>
+<div id="example"></div>
+<div>
+    <p>你没办法通过 this.props.children 取得当前组件的子元素。 因为this.props.children 返回的是组件拥有者传递给你的 passed onto you 子节点</p>
+    <div id="app"></div>
+</div>
+<script type="text/babel">
+    ReactDOM.render(
+            <input value="hi"/>,
+            document.getElementById('example')
+    );
+    setTimeout(function () {
+        ReactDOM.render(
+                <input value={null}/>,
+                document.getElementById('example')
+        );
+    },3000)
+
+
+    var App = React.createClass({
+        componentDidMount: function() {
+            // This doesn't refer to the `span`s! It refers to the children between
+            // last line's `<App></App>`, which are undefined.
+            console.log(this.props.children);
+        },
+
+        render: function() {
+            return <div><span/><span/></div>;
+        }
+    });
+    ReactDOM.render(
+            <App></App>,
+            document.getElementById('app')
+    );
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the5fire-backbone-model</title>
+</head>
+<body>
+</body>
+<script src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+<script src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+<script src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+<script>
+    (function ($) {
+        var Man=Backbone.Model.extend({
+            initialize:function(){
+                alert("hello hello");
+                //监听对象中属性变化
+                this.bind("change:name",function () {
+                    var name=this.get("name");
+                    console.log("你改变了name属性为：" + name);
+                });
+                //为对象添加验证规则，以及错误提示
+                this.bind("invalid",function (model,error) {
+                    console.log(error);
+                })
+            },
+            defaults:{
+                name:"zhang",
+                age:'38'
+            },
+            validate:function(attributes){
+                if(attributes.name == '') {
+                    return "name不能为空！";
+                }
+            },
+            aboutMe:function () {
+                return "ablout:"+this.get("name")+"age:"+this.get("age")
+            }
+        })
+
+        var man =new Man();
+        console.log(man.get('name'))
+       // console.log(man.has('name'))
+        //console.log(man.aboutMe())
+        //man.set({"name":"rui"});
+        man.set({name:''});
+        //手动触发验证, set时会触发
+        //man.set({name:''}, {'validate':true});
+        //save时触发验证。根据验证规则，弹出错误提示。
+        man.save();
+    })(jQuery);
+</script>
+</html>

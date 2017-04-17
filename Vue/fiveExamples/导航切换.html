@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nav-Change</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            text-align: center;
+            font-family: Microsoft YaHei;
+        }
+        #main{
+
+            margin:0 auto;
+        }
+        nav{
+            display:inline-block;
+            margin:60px auto 45px;
+            background-color:#5597b4;
+            box-shadow:0 1px 1px #ccc;
+            border-radius:2px;
+        }
+        nav a{
+            display:inline-block;
+            padding: 18px 30px;
+            color:#fff !important;
+            font-weight:bold;
+            font-size:16px;
+            text-decoration:none !important;
+            line-height:1;
+            background-color:transparent;
+            -webkit-transition:background-color 0.25s;
+            -moz-transition:background-color 0.25s;
+            transition:background-color 0.25s;
+            cursor:pointer;
+        }
+        b{
+            display:inline-block;
+            padding:5px 10px;
+            background-color:#c4d7e0;
+            border-radius:2px;
+            font-size:18px;
+        }
+        .show{
+            background-color:#e35885;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <nav>
+        <a v-for="item in items" :class="{'show':item.active}" @click="makeActive(item, $index)">{{item.name}}</a>
+    </nav>
+    <p>You choose <b>{{active}}</b></p>
+</div>
+<script>
+    new Vue({
+        el: "#main",
+        data: {
+            active: 'Home',
+            items: [
+                {name: 'Home', active: true},
+                {name: 'Lesson', active: false},
+                {name: 'Contact', active: false},
+                {name: 'More', active: false}
+            ]
+        },
+        methods: {
+            makeActive: function (item, index) {
+                this.active = item.name;
+                for(var i=0;i<this.items.length;i++){
+                    this.items[i].active=false;
+                }
+                this.items[index].active = true;
+                //item.active=true;
+            }
+        }
+    })
+</script>
+</body>
+</html>

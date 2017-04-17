@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the5fire-backbone-model</title>
+</head>
+<body>
+<script src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+<script src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+<script src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+<script>
+
+
+        var app;
+        // 图书数据库
+        var booksData = [
+            {
+                name: 'book1',
+                url: 'img/1.jpg'
+            },
+            {
+                name: 'book2',
+                url: 'img/2.jpg'
+            }
+        ];
+        var router = Backbone.Router.extend({
+            routes: {
+                '': 'home',
+                'books/:bookName': 'loadBook'
+            },
+            initialize: function (){
+                // 一些在对象初始化的时候执行的代码
+                var books = new Books();
+                books.reset(booksData);
+                this.homeView = new homeView({collection: books});
+                this.bookView = new bookView({collection: books});
+            },
+            home: function (){
+                this.homeView.render();
+            },
+            // 渲染apples页面
+            loadBook: function (bookName){
+                this.bookView.render(bookName);
+            }
+        });
+
+        var homeView = Backbone.View.extend({
+            el: 'body',
+            template: _.template('books data: <%= data %>'),
+            render: function (){
+                this.$el.html(this.template({
+                    data: JSON.stringify(this.collection.models)
+                }));
+            }
+            // TODO 子视图
+        });
+
+        var Books = Backbone.Collection.extend({});
+
+        // apples 视图
+        var bookView = Backbone.View.extend({
+            template: _.template(
+                    '<h2><%= attributes.name %></h2><img src="<%= attributes.url %>">'
+            ),
+            // TODO 用加载苹果过程和事件绑定来重写
+            render: function (bookName){
+                var bookModel = this.collection.where({name: bookName})[0];
+                var bookHtml = this.template(bookModel);
+                $('body').html(bookHtml);
+            }
+        });
+
+        $(function (){
+            app = new router;
+            Backbone.history.start();
+        });
+
+</script>
+</body>
+</html>

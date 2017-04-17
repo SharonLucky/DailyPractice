@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<hr>
+<div id="todo"></div>
+<script type="text/babel">
+    var GroceryList = React.createClass({
+        handleClick: function(i) {
+            console.log('You clicked: ' + this.props.items[i]);
+        },
+
+        render: function() {
+            return (
+                    <div>
+                        {this.props.items.map(function(item, i) {
+                            return (
+                                    <div onClick={this.handleClick.bind(this, i)} key={i}>{item}</div>
+                            );
+                        }, this)}
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<GroceryList items={['Apple', 'Banana', 'Cranberry']} />, document.getElementById('example'));
+
+    /*对父组件要调用的子组件简单的公开方法,以一个待办事项列表为例，点击后该列表会被删除。如果只剩下一个未完成的待办事项，给它添加动画*/
+    var Todo = React.createClass({
+        render: function() {
+            return <div onClick={this.props.onClick}>{this.props.title}</div>;
+        },
+        //this component will be accessed by the parent through the `ref` attribute
+        animate: function() {
+            console.log('Pretend %s is animating', this.props.title);
+        }
+    });
+    var Todos = React.createClass({
+        getInitialState: function() {
+            return {items: ['代办1', '待办2', '代办3']};
+        },
+        handleClick: function(index) {
+            var items = this.state.items.filter(function(item, i) {
+                console.log(index)
+                console.log(i)
+                return index !== i;
+            });
+            this.setState({items: items}, function() {
+                if (items.length === 1) {
+                    this.refs.item0.animate();
+                }
+            }.bind(this));
+        },
+        render: function() {
+            return (
+                    <div>
+                        {this.state.items.map(function(item, i) {
+                            console.log(this)
+                            var boundClick = this.handleClick.bind(this, i);
+                            return (
+                                    <Todo onClick={boundClick} key={i} title={item} ref={'item' + i} />
+                            );
+                        }, this)}
+                    </div>
+            );
+        }
+    });
+    ReactDOM.render(<Todos/>,document.getElementById('todo'));
+</script>
+</body>
+</html>

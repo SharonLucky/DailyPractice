@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p v-el:elel>我是v-el</p>
+    <p style="color: #2ABF9E" v-pre> {{message }}</p>
+    {{message }}
+    {{* message }}
+    {{ message1 }}
+    {{{ message1 }}}
+    <input v-model="message" debounce="500">
+    <button v-on:click="reverseMessage">Reverse Message</button>
+    <div>
+        <ul>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+    <div v-if="Math.random() > 0.5">
+        Sorry
+    </div>
+    <div v-else>
+        Not sorry
+    </div>
+</div>
+
+
+
+<script>
+    var vm=new Vue({
+        el: '#app',
+        customOption:"mymymy",//自定义属性
+        data: {
+            a:1,
+            ok:"true",
+            message: 'Hello Vue.js!',
+            message1: '<h1>Hello Vue.js!</h1>',
+            todos: [
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue.js' },
+                { text: 'Build Something Awesome' }
+            ]
+        },
+        methods: {
+            reverseMessage: function () {
+                console.log(this.$els.elel.innerHTML)
+                this.message = this.message.split('').reverse().join('')
+            }
+        },
+        computed:{
+            //仅读取，值为函数
+            aDouble:function () {
+                return this.a*2;
+            },
+            aPlus:{
+                get:function () {
+                    return this.a+1;
+                },
+                set:function(v){
+                    this.a=v-1
+                }
+            }
+        },
+        watch: {
+            'a': function (val, oldVal) {
+                console.log('new: %s, old: %s', val, oldVal)
+            },
+            'b':function(){
+
+            }
+        }
+    })
+
+    console.log(vm.aPlus);//2
+    vm.aPlus=7;
+    console.log(vm.a);//6
+    console.log(vm.aDouble);//12
+    //console.log(vm.$data);
+    //console.log(vm.$data.ok);
+    //console.log(vm.$el);
+    //console.log(vm.$options.customOption);
+    //console.log(vm.$parent);
+    //console.log(vm.$root);
+    //console.log(vm.$eval("message|uppercase"));//HELLO VUE.JS!
+    //console.log(vm.$interpolate("已经绑定的值：{{message}}"));
+    //console.log(vm.$log());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+</head>
+<body>
+<div id="target"></div>
+<div id="onwheel"></div>
+<div id="which"></div>
+<script type="text/babel">
+    var style = {
+        color: "red",
+        border: "1px green solid"
+    };
+    var Hello = React.createClass({
+        handleClick: function (e) {
+            console.log(e.target.value)
+        },
+        render: function () {
+            return (<div>
+                <input type="text" onChange={this.handleClick}/>
+            </div>)
+        }
+    })
+    ReactDOM.render(<div style={style}>
+        <Hello></Hello>
+    </div>, document.getElementById("target"));
+
+
+
+
+    /*滚轮事件onWheel*/
+    var HelloWorld1 = React.createClass({
+        getInitialState: function () {
+            return {backgroundColor: '#FFFFFF'}
+        },
+        handleWheel: function (e) {
+            this.setState({
+                backgroundColor: "red"
+            });
+        },
+        render: function () {
+            console.log(this.state)
+            return (
+                    <div onWheel={this.handleWheel} style={this.state}>
+                        <p>Hello World</p>
+                    </div>
+            )
+        }
+    })
+    ReactDOM.render(<HelloWorld1></HelloWorld1>, document.getElementById("onwheel"));
+
+
+
+
+    var HelloWorld = React.createClass({
+        getInitialState: function () {
+            return {
+                password: ''
+            }
+        },
+        handleKeyPress: function (event) {
+            this.setState({
+                password: this.state.password + event.which
+            });
+            console.log(this.state)
+        },
+        handleChange: function (event) {
+            event.target.value = '';
+        },
+        render: function () {
+            return <div>
+                <input onKeyPress={this.handleKeyPress} onChange={this.handleChange}/>
+                <p style={{'display':this.state.password.indexOf('495051')>=0 ? 'inline':'none'}}>You got it
+                </p>
+            </div>
+        },
+    });
+    ReactDOM.render(<HelloWorld></HelloWorld>, document.getElementById("which"));
+</script>
+</body>
+</html>

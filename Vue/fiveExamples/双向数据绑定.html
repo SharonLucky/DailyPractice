@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向数据绑定</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            text-align: center;
+            font-family:Microsoft YaHei;
+        }
+        #main{
+            height:300px;
+            position:relative;
+            padding-top: 150px;
+        }
+        .tooltip{
+            background-color:#5c9bb7;
+            border-radius:3px;
+            width: 290px;
+            padding: 10px;
+            position: absolute;
+            left:50%;
+            margin-left:-150px;
+            top: 80px;
+        }
+        .tooltip input{
+            border: none;
+            width: 100%;
+            line-height: 34px;
+            border-radius: 3px;
+            box-shadow: 0 2px 6px #bbb inset;
+            text-align: center;
+            font-size: 16px;
+            font-family: inherit;
+            color: #8d9395;
+            font-weight: bold;
+            outline: none;
+        }
+        p{
+            font-size:22px;
+            font-weight:bold;
+            color:#6d8088;
+            height: 30px;
+            cursor:pointer;
+        }
+        p:before{
+            content:'✎';
+            display:inline-block;
+            margin-right:5px;
+            font-weight:normal;
+            vertical-align: text-bottom;
+        }
+    </style>
+</head>
+<body>
+<div id="main" v-cloak @click="hideTooltip">
+    <div class="tooltip" v-if="show_tooltip">
+        <input type="text" v-model="text_content">
+    </div>
+    <p @click="toggleTooltip">{{text_content}}</p>
+</div>
+<script>
+new Vue({
+    el:"#main",
+    data:{
+        show_tooltip:false,
+        text_content: 'Edit me.'
+    },
+    methods:{
+        hideTooltip:function () {
+            this.show_tooltip=false;
+        },
+        toggleTooltip:function () {
+            this.show_tooltip=!this.show_tooltip;
+        }
+    }
+})
+</script>
+</body>
+</html>

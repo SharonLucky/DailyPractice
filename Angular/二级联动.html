@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS</title>
+    <script  type="text/javascript" class="library" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script  type="text/javascript" class="library" src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<div class='content' ng-app="app" ng-controller="con">
+        <select id="sel" ng-model="selectedDistrict" ng-change="as()"  ng-options="district.giftName for district in districts[0].list" >
+            <option value="">全部</option>
+        </select>
+        <select ng-model="selectedUnit"  ng-if="aaa" ng-options="('规格：'+unit.name+'  库存：'+unit.stock) for unit in selectedDistrict.specification.items"></select>
+    <select ng-model="selectedUnit1"  ng-if="bbb">
+        <option value="">库存：{{selectedDistrict.stock}}</option>
+    </select>
+    </div>
+</div>
+<script>
+    angular.module("app",[])
+            .controller("con",function ($scope) {
+
+                $scope.districts=[
+                    {
+                        "list": [
+                            {
+                                "giftId": 0,//等级id为0
+                                "giftCode": "GRADE",
+                                "image": "1.jpg",
+                                "giftName": "等级奖励"
+                            }, {
+                                "giftId": 1,
+                                "giftCode": "SELLER",
+                                "image": "1.jpg",
+                                "giftName": "实物礼品有规格",
+                                "stock": 10,
+                                "specification": {
+                                    "types": ["颜色", "尺码", "制式"],
+                                    "items": [
+                                        {"name": "红色,小,联通", "valueIds": "1,1,1", "stock": 10},
+                                        {"name": "红色,大,联通", "valueIds": "1,2,1", "stock": 11},
+                                        {"name": "黑色,小,联通", "valueIds": "2,1,1", "stock": 12}
+                                    ]
+                                },
+                            }, {
+                                "giftId": 2,
+                                "giftCode": "SELLER",
+                                "image": "1.jpg",
+                                "giftName": "实物礼品无规格",
+                                "stock": 100,
+                                "specification": null
+                            }, {
+                                "giftId": 55,
+                                "giftCode": "UMP",//电子卡券，淘宝优惠，都没有规格，只有库存
+                                "image": "1.jpg",
+                                "giftName": "3-2抵钱购",
+                                "stock": 101
+                            }, {
+                                "giftId": 30,
+                                "giftCode": "COUPON",//优惠券
+                                "image": "1.jpg",
+                                "giftName": "满100减10元",
+                                "stock": 102,
+                                "condition": 100.0,
+                                "denominations": 20.0    //面值
+                            }
+                        ]
+                    }
+                ];
+                $scope.aaa=true;
+                $scope.bbb=false;
+                /*$scope.districts=[
+                 {code: '99', name: '省直', units: [
+                 {code: '9901', name: '省单位1', positions: [
+                 {code: '990101', name: '省职位1' },
+                 {code: '990102', name: '省职位2' }
+                 ]},
+                 {code: '9902', name: '省单位2', positions: [
+                 {code: '990201', name: '省职位3' },
+                 {code: '990202', name: '省职位4' }
+                 ]}
+                 ]},
+                 {code: '01', name: '长沙', units: [
+                 {code: '0101', name: '长沙单位1', positions: [
+                 {code: '010101', name: '长沙职位1' },
+                 {code: '010102', name: '长沙职位2' }
+                 ]},
+                 {code: '0201', name: '长沙单位2', positions: [
+                 {code: '010201', name: '长沙职位3' },
+                 {code: '010202', name: '长沙职位4' }
+                 ]}
+                 ]}];*/
+                $scope.as=function () {
+                   // $("#sel option[value='de']").remove();
+                    if($scope.selectedDistrict.specification&&$scope.selectedDistrict.specification.items){
+                        $scope.aaa=true;
+                        $scope.bbb=false;
+                    }else{
+                        $scope.aaa=false;
+                        $scope.bbb=true;
+                        //$scope.selectedUnit1='库存：'+$scope.selectedDistrict.stock;
+                    }
+
+                }
+
+               $scope.$watch("selectedDistrict",function (n,o) {
+                   console.log(n)
+               })
+           })
+</script>
+</body>
+</html>

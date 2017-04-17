@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="//cdn.bootcss.com/redux/3.5.2/redux.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+</head>
+<body>
+
+<input id="todoInput" type="text" />
+<button id="btn">提交</button>
+<script>
+    /*
+    * Redux 有五个 API，分别是：
+
+     * createStore(reducer, [initialState])
+     * combineReducers(reducers)
+     * applyMiddleware(...middlewares)
+     * bindActionCreators(actionCreators, dispatch)
+     * compose(...functions)
+
+      createStore 生成的 store 有四个 API，分别是：
+      * getState()
+      * dispatch(action)
+      * subscribe(listener)
+      * replaceReducer(nextReducer)*/
+
+    /*1.compose(...functions)
+    * 运用起来是这样子的
+    * compose(f, g, h)(...arg) => f(g(h(...args)))*/
+    function fun1(num){
+        console.log('func1的num'+num)
+        return num+1;
+    }
+    
+    function  fun2(num) {
+        console.log('fun2的num:'+num);
+        return num+2;
+    }
+    function fun3(num) {
+        console.log('fun3的num:'+num)
+        return num+3;
+    }
+    var sumNum1=fun3(fun2(fun1(0)));
+    console.log('sumNum1：' + sumNum1);
+
+    var sumNum2=Redux.compose(fun3,fun2,fun1)(0);
+    console.log('sumNum2：' + sumNum2);
+
+    /*2.createStore(reducer, initialState, enhancer)
+    *
+    * */
+
+    /*3.combineReducers(reducers)
+     把 state 分而治之，极大减轻开发与维护的难度
+    *
+    *                                  counterReducer(counter, action) -------------------- counter
+     ↗                                                              ↘
+     rootReducer(state, action) —→∑     ↗ optTimeReducer(optTime, action) ------ optTime ↘         nextState
+     ↘—→∑                                                    todo  ↗
+     ↘ todoListReducer(todoList,action) ----- todoList ↗
+
+
+     注：左侧表示 dispatch 分发流，∑ 表示 combineReducers；右侧表示各实体 reducer 的返回值，最后汇总整合成 nextState
+     */
+
+
+    /*4.bindActionCreator(actionCreators,dispach)
+    *说是没啥用== */
+    var actionsCreators=Redux.bindActionCreator(
+            {addTodo:addTodo},
+            store.dispatch//传入dispatch
+    );
+    $('#btn').on('click', function() {
+        var content = $("#todoInput").val();
+        actionsCreators.addTodo(content);//他会自动调用dispatch
+    })
+
+
+
+</script>
+</body>
+</html>

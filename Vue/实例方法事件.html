@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="demo">
+    <button >tetett</button>
+</div>
+<hr>
+<div id="app"></div>
+<script>
+    var vm=new Vue({
+        el:"#demo",
+
+    })
+    vm.$on("test",function (m) {
+        console.log("hello welcome:"+m)
+    })
+    //vm.$emit("test","rui");//触发实例事件，附加参数传给监听器回调
+
+
+    var parent = new Vue()
+    // child1 和 child2 是兄弟
+    var child1 = new Vue({ parent: parent })
+    var child2 = new Vue({ parent: parent })
+    // child3 在 child2 内
+    var child3 = new Vue({ parent: child2 })
+
+    child1.$on('test', function () {
+        console.log('child1 notified')
+    })
+    child2.$on('test', function () {
+        console.log('child2 notified')
+    })
+    child3.$on('test', function () {
+        console.log('child3 notified')
+    })
+
+
+    //child3.$dispatch('test')
+    //parent.$broadcast('test')
+
+    //vm.$appendTo("#app")
+</script>
+</body>
+</html>

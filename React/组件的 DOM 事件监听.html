@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    var Box=React.createClass({
+        getInitialState: function() {
+            return {windowWidth: window.innerWidth};
+        },
+        handleResize: function(e) {
+            this.setState({windowWidth: window.innerWidth});
+        },
+
+        componentDidMount: function() {
+            //在初始化渲染执行之后立刻调用一次，仅客户端有效
+            console.log("componentDidMount")
+            window.addEventListener('resize', this.handleResize);
+        },
+
+        componentWillUnmount: function() {
+            //在组件从 DOM 中移除的时候立刻被调用。
+            window.removeEventListener('resize', this.handleResize);
+        },
+
+        render: function() {
+            return <div>Current window width: {this.state.windowWidth}</div>;
+        }
+    });
+    ReactDOM.render(
+            <Box/>,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

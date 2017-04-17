@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html ng-app="myTest">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <style type="text/css">
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        select {
+            width: 250px;
+            height: 400px;
+        }
+
+        select option {
+            margin: 10px;
+        }
+
+        #sec01, #sec02 {
+            width: 200px;
+            min-height: 450px;
+            margin: 10px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            padding: 10px;
+            float: left;
+        }
+
+        #sec01 p, #sec02 p,select option {
+            padding: 5px 5px 5px 10px;
+        }
+
+        #sec01 p:hover, #sec02 p:hover,select option:hover {
+            background-color: #f9f2f4;
+        }
+    </style>
+</head>
+<body ng-controller="OpCtrl">
+<!--指令1 ： 左右两边数据互换-->
+<div class=" container">
+    <table class=" table">
+        <tr>
+            <td>指令1 ： 左右两边数据互换</td>
+            <td>
+                <selremove id="sel" get-opitems="OpItems"></selremove>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!--指令2 ：左边数据到右边，右边数据返回到左边-->
+<div class=" container">
+    指令2 ：左边数据到右边，右边数据返回到左边
+    <selremove2 id="sec" get-opitems="OpItems2"></selremove2>
+</div>
+</body>
+</html>
+<script>
+    var myTest = angular.module("myTest", []);
+    myTest.directive("selremove", function () {
+        return {
+            restrict: 'EA',
+            scope: {
+                getOpitems: '&',
+                id: '@id'
+            },
+            template: '<table>' +
+            '<tr>' +
+            '<td>' +
+            '<select  id="{{id}}01" multiple ng-click="NextFun()" ng-options="option.name for option in data.opItems track by option.val" ng-model="data.selectedOption"></select>' +
+            '</td>' +
+            //'<td><button ng-click="NextFun(\'{{id}}01\')" class="btn btn-default">>></button ><br/><button ng-click="PrevFun()" class="btn btn-default"><<</button></td>' +
+            '<td>' +
+            '<select  id="{{id}}02" multiple ng-click="PrevFun()"  ng-options="option.name for option in data.selectedAllOption track by option.val" ng-model="data.selectedOption">' +
+            '</select>' +
+            '</td>' +
+            '</tr>' +
+            '</table>',
+            controller: function ($scope) {
+
+                $scope.data = {
+                    opItems: $scope.getOpitems(),
+                    selectedOption: [],
+                    selectedAllOption: []
+                };
+
+                //右移
+                $scope.NextFun = function () {
+                    console.log("NextFun");
+                    var selOption = $scope.data.selectedOption;  //使用的是自带的选择option
+                    for (var i in selOption) {
+
+                        var item = selOption[i];
+                        for (var ii in $scope.data.opItems) {
+
+                            var item01 = $scope.data.opItems[ii];
+                            if (item01.val != item.val || !angular.isObject(item01)) {
+                                continue;
+                            }
+
+                            //添加到最终选中框
+                            // console.log("next:" + item01.val);
+                            $scope.data.selectedAllOption.push(item01);
+                            //移除opItems数据
+                            $scope.data.opItems.splice(ii, 1);
+                            break;
+                        }
+                    }
+                }
+
+                //左移
+                $scope.PrevFun = function () {
+
+                    console.log("PrevFun");
+                    var selOption = $scope.data.selectedOption;
+
+                    for (var i in selOption) {
+
+                        var item01 = selOption[i];
+                        for (var ii in $scope.data.selectedAllOption) {
+
+                            var item = $scope.data.selectedAllOption[ii];
+                            // console.log(item01.val + "|" + item.val + "|" + ii);
+                            if (item01.val != item.val || !angular.isObject(item)) {
+                                continue;
+                            }
+
+                            //添加到原始集合
+                            $scope.data.opItems.push(item);
+                            //移除selectedAllOption数据
+                            $scope.data.selectedAllOption.splice(ii, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    });
+    myTest.directive("selremove2", function () {
+        return {
+            restrict: 'EA',
+            scope: {
+                getOpitems: '&',
+                id: '@'
+            },
+            template: '<div  id="{{id}}01">' +
+            '<p ng-click="Next(option.val)" ng-repeat="option in data.opItems track by option.val">{{option.name}}</p></div>' +
+            '<div  id="{{id}}02">' +
+            '<p  ng-click="Prev(option1.val)" ng-repeat=" option1 in data.selectedAllOption track by option1.val">{{option1.name}}<button ng-click="Prev(option1.val)">Del</button></p>' +
+            '</div>',
+            controller: function ($scope) {
+                $scope.data = {
+                    opItems: $scope.getOpitems(),
+                    selectedAllOption: []
+                };
+                $scope.Next = function (val) {
+
+                    if ($scope.data.selectedAllOption.length != 0) {
+                        for (var i in  $scope.data.selectedAllOption) {
+                            var flag = $scope.data.selectedAllOption.every(function (item, indx) {
+                                return item.val != val
+                            })
+                        }
+                        console.log("flag:" + flag)
+                        angular.forEach($scope.data.opItems, function (value, key) {
+                            if (value.val == val&&flag) {
+                                $scope.data.selectedAllOption.push(value)
+                            }
+                        })
+                    } else {
+                        angular.forEach($scope.data.opItems, function (value, key) {
+                            if (value.val == val) {
+                                $scope.data.selectedAllOption.push(value)
+                            }
+                        })
+                    }
+
+                };
+                $scope.Prev = function (val) {
+                    angular.forEach($scope.data.selectedAllOption, function (value, key) {
+                        if (value.val == val) {
+                            $scope.data.selectedAllOption.splice(key, 1);
+                        }
+                    })
+                };
+            }
+        }
+    });
+    myTest.controller("OpCtrl", function ($scope) {
+
+        $scope.OpItems = [
+            {
+                name: "苹果",
+                val: "1"
+            },
+            {
+                name: "橘子",
+                val: "2"
+            },
+            {
+                name: "番茄",
+                val: "3"
+            },
+            {
+                name: "香蕉",
+                val: "4"
+            },
+            {
+                name: "汽车",
+                val: "5"
+            },
+            {
+                name: "作业",
+                val: "6"
+            },
+            {
+                name: "工资",
+                val: "7"
+            },
+            {
+                name: "游戏",
+                val: "8"
+            },
+            {
+                name: "冲浪",
+                val: "9"
+            }
+        ];
+        $scope.OpItems2 = [
+            {
+                name: "苹果1",
+                val: "1"
+            },
+            {
+                name: "橘子2",
+                val: "2"
+            },
+            {
+                name: "番茄3",
+                val: "3"
+            },
+            {
+                name: "香蕉4",
+                val: "4"
+            },
+            {
+                name: "猕猴桃5",
+                val: "5"
+            },
+            {
+                name: "柚子6",
+                val: "6"
+            },
+            {
+                name: "草莓7",
+                val: "7"
+            },
+            {
+                name: "西瓜8",
+                val: "8"
+            },
+            {
+                name: "板栗9",
+                val: "9"
+            }
+        ];
+    });
+
+</script>

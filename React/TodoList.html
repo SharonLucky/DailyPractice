@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>todolist-搜索、添加、勾选，没有删除</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+    <link rel="stylesheet" href="../../commonCss/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .todoList {
+            width: 600px;
+            padding: 10px;
+            margin: 10px auto;
+            background-color: wheat;
+        }
+
+        .todoItem {
+            width: 550px;
+            height: 40px;
+            background-color: #eee;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            margin: 10px auto 0;
+            position: relative;
+        }
+
+        .todoItem:first-child {
+            margin-top: 0;
+        }
+
+        .todoItem * {
+            width: 140px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .todoItem .filter{
+            width: 150px;
+            height: 40px;
+            position: absolute;
+            background-color: gray;
+            opacity: 0;
+            right: 0;
+        }
+        .todoItem .filter>button{
+            line-height: 17px;
+        }
+        .todoItem input {
+            /*width: 30px;
+            height: 100%;*/
+            width: 30px;
+            height: 15px;
+            line-height: 15px;
+            display: inline-block;
+            margin-top: 13px;
+        }
+
+        .todoItem .name {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .todoItem.hasDone > div {
+            text-decoration: line-through;
+        }
+
+        /*搜索框*/
+        .searchBox {
+            width: 550px;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .searchBox input {
+            width: 100%;
+            height: 30px;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        /*add Item*/
+        .addItem{
+            width: 550px;
+            height: 30px;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            margin: 10px 5px ;
+        }
+        .addItem input{
+            width: 100%;
+            margin-right: 15px;
+            margin-left: 10px;
+        }
+        .addItem button{
+            width: 16%;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    var TodoList = React.createClass({
+        handleSearchTextUpdate:function (searchText) {
+            this.state.searchText = searchText;
+            this.setState(this.state);
+        },
+        getInitialState: function () {
+            return {
+                data: [],
+                searchText: '',
+                addText:''
+            };
+        },
+        componentDidMount: function () {
+
+            var mockData = [
+                {id: 1, name: "report the updates to Boss", time: "2016/7/1-09:30"},
+                {id: 2, name: "Stand-up meeting", time: "2016/7/3-10:00"},
+                {id: 3, name: "Draw up a plan for next step", time: "2016/8/1-11:00"},
+                {id: 4, name: "sunny day to trip", time: "2016/8/2-12:03"},
+                {id: 5, name: "跑步+打球+运动", time: "2016/8/3-14:00"},
+                {id: 6, name: "金风玉露一相逢，便胜却人间无数", time: "2016/8/4-08:00"}
+
+            ];
+            this.state.data = mockData;
+            this.setState(this.state);
+
+        },
+        handlerKeyUp:function (e) {
+            if(e.keyCode == 13) {
+                this.addItem();
+            }
+        },
+        addItem:function () {
+            this.state.addText=this.refs.addItem.value;
+            var date=new Date();
+            var getHours=date.getHours()<10?"0"+date.getHours():date.getHours();
+            var getMinutes=date.getMinutes()<10?"0"+date.getMinutes():date.getMinutes();
+            var addItem={
+                id:this.state.data.length+1,
+                name:this.state.addText,
+                time:date.getFullYear()+'/'+date.getMonth()+'/'+date.getDate()+'-'+getHours+':'+getMinutes
+            };
+            if(this.state.addText){
+                this.state.data.push(addItem)
+                this.setState(this.state);
+                this.refs.addItem.value='';
+            }
+        },
+        deleteTodo:function (index) {
+
+            console.log(index)
+        },
+        render: function () {
+            var state = this.state;
+
+
+            var todoItems = state.data.filter(function(todo) {
+                return todo.name.toLowerCase().indexOf(state.searchText.toLowerCase()) > -1;
+            }).map(function (todo,index) {
+
+                return (
+                        <TodoItem todo={todo} index={index}/>
+                )
+            });
+            return (
+                    <div className="todoList">
+                        <SearchBox onSearchTextUpdate={this.handleSearchTextUpdate}/>
+                        {todoItems}
+                        <div className="addItem">
+                            <input type="text" placeholder="write new item" ref="addItem" onKeyUp={this.handlerKeyUp} maxLength="15"/>
+                            <button className="btn btn-default btn-sm" onClick={this.addItem}>Add</button>
+                        </div>
+                    </div>
+            );
+        }
+    });
+
+
+    var TodoItem = React.createClass({
+        handleClick: function () {
+            var todoData = this.props.todo;
+            todoData.hasDone = !todoData.hasDone;
+            this.setState({hasDone: todoData.hasDone});
+        },
+        handleMouseover:function () {
+            this.refs.filter.style.opacity=0.8;
+        },
+        handleMouseout:function () {
+            this.refs.filter.style.opacity=0;
+        },
+        handleDel:function () {
+           /* this.props.deleteTodo(this.props.index);*/
+        },
+        getInitialState: function () {
+            return {hasDone: false}
+        },
+        componentDidMount: function () {
+            this.setState({hasDone: this.props.todo.hasDone})
+        },
+        render: function () {
+            var classList = ['todoItem'];
+            this.state.hasDone && classList.push('hasDone');  //add a 'hasDone' class after checkbox is checked
+            var classNames = classList.join(' ');
+
+            return (
+                    <div className={classNames} onMouseOver={this.handleMouseover} onMouseOut={this.handleMouseout}>
+                        <input type="checkbox" onClick={this.handleClick} checked={this.props.todo.hasDone}/>
+                        <div className="name">{this.props.todo.name}</div>
+                        <div className="time">{this.props.todo.time}</div>
+                        <div className="filter" ref="filter">
+                            <button className="btn btn-danger" onClick={this.handleDel}>Delete</button>
+                        </div>
+                    </div>
+            )
+        }
+    });
+
+    var SearchBox = React.createClass({
+        handleChange:function (event) {
+            var newInput=event.target.value;
+            this.props.onSearchTextUpdate(newInput);
+        },
+        render: function () {
+            return (
+                    <div className="searchBox">
+                        <input type="text" onChange={this.handleChange} placeholder="type in keywords to search"/>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(
+            <TodoList/>,
+            document.getElementById('example')
+    );
+
+
+</script>
+</body>
+</html>

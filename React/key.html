@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+</head>
+<body>
+<div id="example1"></div>
+<script type="text/babel">
+    /*当 React 校正带有 key 的子级时，它会确保它们被重新排序（而不是破坏）或者删除（而不是重用）。
+     务必 把 key 添加到子级数组里组件本身上，而不是每个子级内部最外层 HTML 上 */
+    // 正确 :)
+    var ListItemWrapper = React.createClass({
+        render: function () {
+            return <li>{this.props.data.text}</li>;
+        }
+    });
+    var MyComponent = React.createClass({
+        render: function () {
+            return (
+                    <ul>
+                        {this.props.results.map(function (result) {
+                            return <ListItemWrapper key={result.id} data={result}/>;
+                        })}
+                    </ul>
+            );
+        }
+    });
+    var results = [
+        {text: 'one', id:1},
+        {text: 'two', id:2},
+        {text: 'three', id:3},
+        {text: 'four', id:4},
+        {text: 'five', id:5},
+        {text: 'six', id:6}
+    ];
+    ReactDOM.render(
+            <MyComponent results={results}/>,
+            document.getElementById('example1')
+    );
+</script>
+</body>
+</html>

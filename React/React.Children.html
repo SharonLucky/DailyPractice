@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <link rel="stylesheet" href="../../commonCss/bootstrap.min.css">
+</head>
+<body>
+<p class="text-info text-center">React.Children 为处理 this.props.children 这个封闭的数据结构提供了有用的工具。</p>
+
+<!--React.Children.map方法-->
+<p class="text-primary">React.Children.map方法</p>
+<div id="map"></div>
+<hr>
+<!--React.Children.forEach方法-->
+<p class="text-primary">React.Children.forEach方法，类似于 React.Children.map()，但是不返回对象。</p>
+<hr>
+<!--React.Children.count(object children)方法-->
+<p class="text-primary">React.Children.count方法返回 children 当中的组件总数，和传递给 map 或者 forEach 的回调函数的调用次数一致。
+<br>
+<!--<NotesList>
+        <span>hello</span>
+        <span>hello</span>
+    </NotesList>
+    console.log(React.Children.count(this.props.children)); //2
+
+    <NotesList></NotesList>
+    console.log(React.Children.count(this.props.children)); //0
+
+    <NotesList>null</NotesList>
+    console.log(React.Children.count(this.props.children)); //1-->
+</p>
+<hr>
+<!--React.Children.forEach方法-->
+<p class="text-primary">React.Children.forEach方法，类似于 React.Children.map()，但是不返回对象。</p>
+
+<script type="text/babel">
+    var NotesList = React.createClass({
+        render: function () {
+            console.log(React.Children.count(this.props.children));
+            console.log(React.Children.only(this.props.children[0]));
+            return (
+                    <ol>
+                        {
+                            React.Children.map(this.props.children, function (child) {
+                                return <li>{child}</li>;
+                            })
+
+                        }
+                    </ol>
+            )
+        }
+    })
+    ReactDOM.render(
+            <NotesList>
+                <span>hello1span</span>
+                <span>hello2span</span>
+                <p>hello3P</p>
+            </NotesList>,
+            document.getElementById("map")
+    );
+
+
+
+    var ForeachList = React.createClass({
+        render: function () {
+            return (
+                    <ol>
+                        {
+                            React.Children.forEach(this.props.children, function (child) {
+                                return <li>{child}</li>;
+                            })
+
+                        }
+                    </ol>
+            )
+        }
+    })
+
+</script>
+</body>
+</html>

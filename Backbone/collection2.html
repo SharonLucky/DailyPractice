@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://the5fireblog.b0.upaiyun.com/staticfile/jquery-1.10.2.js"></script>
+    <script src="http://the5fireblog.b0.upaiyun.com/staticfile/underscore.js"></script>
+    <script src="http://the5fireblog.b0.upaiyun.com/staticfile/backbone.js"></script>
+</head>
+<body>
+<script>
+    (function ($) {
+        var ship=new Backbone.Collection;
+        ship.on("add",function(ship){
+            console.log(ship.get("name"));
+        })
+        ship.add([{name:"tom"},{name:"lily"}])
+
+    })(jQuery);
+</script>
+</body>
+</html>

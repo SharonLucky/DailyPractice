@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <my-component></my-component>
+    <div>
+        <input v-model="parentMsg">
+        <!--<child v-bind:my-message="parentMsg"></child>-->
+       <!-- <child :my-message.once="parentMsg"></child> 单向绑定-->
+        <!--<child :my-message.sync="parentMsg"></child> 双向绑定-->
+        <child :my-message="parentMsg"></child>
+    </div>
+    <div>
+        <parent></parent>
+    </div>
+</div>
+<script>
+    //定义
+    var MyComponent=Vue.extend({
+        template:"<div>Hello  I am tem</div>"
+    })
+    //注册
+    Vue.component("my-component",MyComponent);
+    Vue.component("child",{
+        props:['myMessage'],
+        template:"<span>{{myMessage}}</span>"
+    });
+
+    //局部注册-start
+
+    var Child=Vue.extend({
+        template:"<span>chiiii</span>"
+    })
+    Vue.component("child1",Child)
+
+    Vue.component("parent",{
+        template:"<div>我是父元素 <child1></child1></div>",
+        components:{
+            "child1":Child
+        }
+    })
+    //局部注册-end
+
+
+    Vue.component("example",{
+        props:{
+            propA:Number,
+            propB:[String,Number],
+            propC:{
+                type:String,
+                required:true
+            },
+            propD:{
+                type:Number,
+                default:100
+            },
+            propE:{
+                type:Object,
+                default:function(){
+                    return {msg:'hello'}
+                }
+            },
+            propF:{
+                twoWay:true
+            },
+            propG:{
+                validate:function(value){
+                    return value>10;
+                }
+            },
+            propH:{
+                coerce:function(value){
+                    return value+''
+                }
+            },
+            propI:{
+                coerce:function (value) {
+                    return JSON.parse(value)
+                }
+            }
+        }
+    })
+    //创建根实例
+    new Vue({
+        el:"#app",
+        data:{
+            parentMsg:"hello"
+        }
+    })
+
+
+</script>
+</body>
+</html>

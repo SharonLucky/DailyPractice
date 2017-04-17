@@ -2,7 +2,127 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a0bfe151-8aed-45a7-aef5-4049f87bda78" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_flat_15_cd0a0a_40x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_glass_100_e4f1fb_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_glass_50_3baae3_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_glass_80_d7ebf9_1x400.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_highlight-hard_70_000000_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_highlight-soft_100_deedf7_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-icons_2694e8_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-icons_2e83ff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-icons_3d80b3_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-icons_72a7cf_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/images/ui-icons_ffffff_256x240.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/img/placeholder.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/todos/destroy.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/$scope.$$children.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/$scope.$parent.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/$transclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/666.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/999.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/controller嵌套.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/transclude.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/zhiling.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/二级联动.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/左右数据选择.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Angular/普通三级联动.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/css/app.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/javascripts/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/javascripts/backbone-localstorage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/javascripts/backbone/backbone.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/javascripts/jquery/jquery.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/1/javascripts/underscore/underscore.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/5/1-hello.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/8989.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/collection.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/collection2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/route.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/jquery-ui-1.10.0.custom.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/cupertino/jquery-ui-1.10.0.custom.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/css/screen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/collections/library.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/lib/backbone.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/lib/jquery-1.9.0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/lib/jquery-dateFormat-1.0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/lib/jquery-ui-1.10.0.custom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/lib/underscore.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/models/book.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/views/book.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/site/js/views/library.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/template.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/todos/backbone.localStorage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/todos/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/todos/todos.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/todos/todos.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/view.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/基本.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/数据赋值.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Backbone/练习示例.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ES6/ES6基础.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/AJAX 加载初始数据.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/JSX的false处理.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/React.Children.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/ReactElement.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/ReduxAPI综合简单例子.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/Redu简单加减例子.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/TodoList.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/TodoList2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/basicDemo1.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/basicDemo2.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/basicDemo3.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/basicjs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/bind.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/createFactory.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/e.target.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/key.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/redux-API.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/todolistES6.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/unmountComponentAtNode.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/valueNULL.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/组件的 DOM 事件监听.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/组件间通信.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/React/表单.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/111.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/8.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/888.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/demo1-hello.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/fiveExamples/即时搜索.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/fiveExamples/双向数据绑定.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/fiveExamples/合计总价.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/fiveExamples/导航切换.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/fiveExamples/布局转换.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/flex布局.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/hello.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/input.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/mpp.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/transition.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/vue.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/全局API.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/切换布局222.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/切换布局float.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/实例方法事件.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/指令.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/混合.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/父子间通信.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/组件component.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Vue/过滤器.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/angular.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/browser.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/jquery-2.1.1.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/react-dom-server.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/react-dom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/react-with-addons.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/react-with-addons.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commonJs/react.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/underscore/数组部分.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/underscore/集合部分（数组或对象）.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DailyPractice.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,11 +143,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
               <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="666.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Angular/666.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -107,6 +237,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DailyPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DailyPractice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Angular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -118,6 +262,11 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DailyPractice" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -178,18 +327,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1492416408963</updated>
-      <workItem from="1492416410253" duration="14000" />
+      <workItem from="1492416410253" duration="263000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14000" />
+    <option name="totallyTimeSpent" value="263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="0" width="1936" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17604166" sideWeight="0.5" order="-1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -210,6 +359,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Angular/666.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+    <link rel="stylesheet" href="../../commonCss/bootstrap.min.css">
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel">
+    class App extends React.Component { //定义组件，继承父类
+        constructor() { //定义App类的构造函数
+            super(); //调用父类的构造函数
+            this.db = new LocalDb('ReactDemo');
+            this.state = { //定义组件状态
+                todos: this.db.get('todos') || [],
+                isAllChecked: false
+            };
+        }
+        // 判断是否所有任务的状态都完成，同步底部的全选框
+        allChecked() {
+            let isAllChecked = false;
+            if (this.state.todos.every(todo => todo.isDone)) {
+                isAllChecked = true;
+            }
+            this.setState({   //改变状态，组件重绘
+                todos: this.state.todos,
+                isAllChecked: isAllChecked
+            });
+        }
+        // 添加任务，是传递给Header组件的方法
+        addTodo(todoItem){
+            this.state.todos.push(todoItem);  //todo列表
+            this.db.set('todos', this.state.todos);
+            this.allChecked();
+        }
+        // 删除当前的任务，传递给TodoItem的方法
+        deleteTodo(index){
+            this.state.todos.splice(index, 1);
+            this.setState({todos: this.state.todos});  //改变状态
+            this.db.set('todos', this.state.todos);
+        }
+        // 清除已完成的任务，传递给Footer组件的方法
+        clearDone(){
+            let todos = this.state.todos.filter(todo => !todo.isDone);   //过滤掉数组中todo.isDone为true的item。
+            this.setState({
+                todos: todos,
+                isAllChecked: false
+            });
+            this.db.set('todos', todos);
+        }
+        // 改变任务状态，传递给TodoItem和Footer组件的方法
+        changeTodoState(index, isDone, isChangeAll=false){   //初始化isChangeAll为false
+            if(isChangeAll){     //全部操作
+                this.setState({
+                    todos: this.state.todos.map((todo) => {
+                        todo.isDone = isDone;
+                        return todo;
+                    }),
+                    isAllChecked: isDone
+                });
+            }else{   //操作其中一个todo
+                this.state.todos[index].isDone = isDone;
+                this.allChecked();
+            }
+            this.db.set('todos', this.state.todos);
+        }
+        //组件渲染方法
+        render() {
+            let info = {
+                isAllChecked: this.state.isAllChecked,
+                todoCount: this.state.todos.length || 0,
+                todoDoneCount: (this.state.todos && this.state.todos.filter((todo) => todo.isDone)).length || 0
+            };
+            return (
+                    <div className="todo-wrap">
+                        <TodoHeader addTodo={this.addTodo.bind(this)} />
+                        <TodoMain todos={this.state.todos} deleteTodo={this.deleteTodo.bind(this)} changeTodoState={this.changeTodoState.bind(this)} />
+                        <TodoFooter {...info} changeTodoState={this.changeTodoState.bind(this)} clearDone={this.clearDone.bind(this)} />
+                    </div>
+            );
+        }
+    }
+    ReactDOM.render(<App/>, document.getElementById('app'));
+
+
+
+    class TodoHeader extends React.Component {
+        // 绑定键盘回车事件，添加新任务
+        handlerKeyUp(e) {
+            if(e.keyCode == 13) {
+                let value = e.target.value;
+                if(!value) return false;
+                let newTodoItem = {
+                    text: value,
+                    isDone: false
+                };
+                e.target.value = '';
+                this.props.addTodo(newTodoItem);   //使用props调用App组件传过来的方法。
+            }
+        }
+        render() {
+            return (
+                    <div className="todo-header">
+                        <input onKeyUp={this.handlerKeyUp.bind(this)} type="text" placeholder="请输入你的任务名称，按回车键确认"/>
+                    </div>
+            )
+        }
+    }
+
+
+
+    class TodoMain extends React.Component {
+        render() {
+            if(this.props.todos.length == 0) {
+                return (
+                        <div className="todo-empty">恭喜您，目前没有待办任务！</div>
+                )
+            } else {
+                return (
+                        <ul className="todo-main">
+                            {
+                                this.props.todos.map((todo, index) => {
+                                    //{...this.props} 用来传递TodoMain的todos属性和delete、change方法。
+                                    return <TodoItem text={todo.text} isDone={todo.isDone} index={index} {...this.props}/>
+                                })
+                            }
+                        </ul>
+                )
+            }
+        }
+    }
+
+
+
+    class TodoItem extends React.Component {
+        //改变任务是否已完成的状态
+        handlerChange() {
+            let isDone = !this.props.isDone;
+            this.props.changeTodoState(this.props.index, isDone);
+        }
+        // 鼠标移入事件
+        handlerMouseOver() {
+            React.findDOMNode(this).style.background = '#eee';
+            React.findDOMNode(this.refs.delButton).style.display = 'inline-block';
+        }
+        handlerMouseOut() {
+            React.findDOMNode(this).style.background = '#fff';
+            React.findDOMNode(this.refs.delButton).style.display = 'none';
+        }
+        // 删除当前任务
+        handlerDelete(){
+            this.props.deleteTodo(this.props.index);
+        }
+        render() {
+            let className = this.props.isDone ? 'task-done' : '';
+            return (
+                    <li onMouseOver={this.handlerMouseOver.bind(this)} onMouseOut={this.handlerMouseOut.bind(this)}>
+                        <label>
+                            <input type="checkbox" checked={this.props.isDone} onChange={this.handlerChange.bind(this)} />
+                            <span className={className}>{this.props.text}</span>
+                        </label>
+                        <button ref="delButton" className="btn btn-danger" onClick={this.handlerDelete.bind(this)}>删除</button>
+                    </li>
+            )
+        }
+    }
+
+
+
+    class TodoFooter extends React.Component {
+        //改变任务是否已完成的状态
+        handlerSelectAll(e) {
+            this.props.changeTodoState(null, e.target.checked, true);    // true表示全部操作。
+        }
+        //删除全部已完成的任务
+        handlerDeleteDone() {
+            this.props.clearDone();
+        }
+        render() {
+            return (
+                    <div className="todo-footer">
+                        <label>
+                            <input type="checkbox" checked={this.props.isAllChecked} onChange={this.handlerSelectAll.bind(this)} />全选
+                        </label>
+                        <span><span className="text-success">已完成{this.props.todoDoneCount}</span> / 全部{this.props.todoCount}</span>
+                        <button className="btn btn-danger" onClick={this.handlerDeleteDone.bind(this)}>清除已完成任务</button>
+                    </div>
+            )
+        }
+    }
+</script>
+</body>
+</html>

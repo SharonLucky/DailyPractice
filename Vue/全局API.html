@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="template">
+    <my-com msg="hello mmd"></my-com>
+
+    <!-- 静态 partial -->
+    <partial name="parName"></partial>
+    <!-- 动态 partial id === vm.partialId此处parDong=== vm.parDong-->
+    <partial :name="parDong"></partial>
+</div>
+
+<script>
+
+    Vue.partial("parName", "<p style='color:red'>hello Partial{{msg}}</p>")
+    Vue.partial("parDong", "<p style='color:green'>动态Partial{{msg}}</p>")
+
+    //组件的作用域是孤立的，无法访问父组件的数据
+    var Profile = Vue.extend({
+        props: ['msg'],
+        template: "<p>firstName:{{firstName}}</p><p>{{msg}}</p>",
+        data: function () {
+            return {
+                firstName: "Lexi888",
+                secondName: "Walker"
+            }
+        }
+    })
+    /*  var profile=new Profile({
+     data:{
+     firstName:"Lexi888",
+     secondName:"Walker"
+     }
+     })
+     profile.$mount("#template")*/
+
+    Vue.component("my-com", Profile);
+    new Vue({
+        el: "#template",
+        data: {
+            msg: "初始化",
+            parDong:"parDong"
+        }
+    })
+
+</script>
+</body>
+</html>

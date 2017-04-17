@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
+</head>
+<body>
+<div id="example">
+  <!-- This element's contents will be replaced with your component. -->
+</div>
+<script type="text/babel">
+  var LikeButton = React.createClass({
+    render: function () {
+      return (
+        this.props.a==1 ?  <p>123</p> : null
+      );
+    }
+  });
+  ReactDOM.render(
+    <LikeButton a="1"/>,
+    document.getElementById('example')
+  );
+  setTimeout(function(){
+    var isUnmount = ReactDOM.unmountComponentAtNode(document.getElementById('example'));
+    console.log(isUnmount);  //打印出true
+  }, 2000)
+</script>
+</body>
+</html>

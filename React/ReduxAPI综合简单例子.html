@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="//cdn.bootcss.com/redux/3.5.2/redux.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+</head>
+<body>
+<script>
+
+    function Inc() {
+        return {type:"INC"}
+    }
+    function Dec() {
+        return {type:"DEC"}
+    }
+    function reducer(state,action) {
+        state=state||{counter:0};
+        switch (action.type){
+            case "INC":return {counter:state.counter+1};
+            case "DEC":return {counter:state.counter-1};
+            default:return state
+        }
+    }
+
+    function printStateMiddleware(middlewareAPI){
+        return function (dispatch) {
+            return function (action){
+                console.log("前：",middlewareAPI.getState());
+                var returnValue=dispatch(action);
+                console.log("后：",middlewareAPI.getState());
+                return returnValue;
+            }
+        }
+    }
+
+
+    var enhancedCreateStore=Redux.applyMiddleware(printStateMiddleware)(Redux.createStore);
+
+    var store=enhancedCreateStore(reducer);
+    store.dispatch(Inc())
+    store.dispatch(Inc())
+    store.dispatch(Dec())
+</script>
+</body>
+</html>

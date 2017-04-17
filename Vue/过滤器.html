@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="app">
+    <!-- 'abc' => 'cba' -->
+  <!--  <span v-text="message | reverse"></span>-->
+
+    <!-- 'hello' => 'before hello after' -->
+    <!--<span v-text="message|wrap 'begin' 'end' "></span>-->
+
+    <input v-model="numValue">
+    <!--<p>{{numValue| currencyDisplay }}</p>-->
+    <p>{{numValue| capitalize }}</p>
+
+</div>
+
+<script>
+
+    Vue.filter("reverse",function (value) {
+        return value.split('').reverse().join('')
+    })
+    Vue.filter("wrap",function (value,begin,end) { //过滤器函数可接受任意数量的参数
+        return begin+value+end;
+    })
+    
+    //双向过滤器
+    Vue.filter('currencyDisplay', {
+        //model->view
+        read:function (value) {
+            return '$'+value.toFixed(2);
+        },
+        //view->model
+        write:function (val,oldVal) {
+            var number=+val.replace("/[^\d]/g","");
+            return isNaN(number)?0:parseFloat(number.toFixed(2))
+        }
+    })
+    new Vue({
+        el:"#app",
+        data:{
+            numValue:"$12.3"
+        }
+    })
+
+</script>
+</body>
+</html>

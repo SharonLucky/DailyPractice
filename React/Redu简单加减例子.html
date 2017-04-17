@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redux是一个状态管理库，可以单独使用</title>
+    <script src="//cdn.bootcss.com/redux/3.5.2/redux.min.js"></script>
+</head>
+<body>
+<script>
+    function inc(){
+        return {type:"INC"}
+    }
+    function dec(){
+        return {type:"DEC"}
+    }
+    function reducer(state,action) {
+        state=state||{counter:0};//初始化
+        switch (action.type){
+            case "INC":
+                return {counter:state.counter+1};
+            case "DEC":
+                return {counter:state.counter-1};
+            default:
+                return state;// 无论如何都返回一个 state,否则undefined
+        }
+    }
+    var store=Redux.createStore(reducer);
+    console.log(store.getState());//{counter:0}
+
+    store.dispatch(inc());
+    console.log(store.getState());//{counter:1}
+
+    store.dispatch(inc());
+    console.log(store.getState());//{counter:2}
+
+    store.dispatch(dec());
+    console.log(store.getState());//{counter:1}
+</script>
+</body>
+</html>

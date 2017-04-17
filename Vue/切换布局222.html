@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切换布局good</title>
+    <script src="http://cdn.staticfile.org/angular.js/1.2.10/angular.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0
+        }
+        .tree{
+            border: 1px solid #DBDBDB;
+            display: inline-block;
+            width:300px;
+            min-height: 400px;
+            background: #f8f8f8;
+            margin:30px;
+        }
+
+
+        .left{
+            width: 150px;
+            background: #ededed;
+            height: 500px;
+            position: absolute;
+        }
+        .content{
+            border: 1px solid rosybrown;
+            margin-left:200px;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .content  ul{
+            margin:10px;
+            display:flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            border: 1px solid yellow;
+            min-width: 860px;
+            max-width: 80%;
+            justify-content: center;
+        }
+         .content ul li{
+            list-style: none;
+            border: 1px solid darkseagreen;
+            width: 257px;
+            height:170px;
+            margin:12px;
+        }
+         .content ul li .itemSingle{
+          /*  border: 1px solid rebeccapurple;*/
+            text-align: center;
+             position: relative;
+        }
+        .itemSingle .img{
+            display: inline-block;
+            position: absolute;
+            top: 9px;
+            left: 3px;
+        }
+        .itemSingle .itemName{
+            margin:10px;
+           /* border: 1px solid red;*/
+            height: 40px;
+            text-align: left;
+            width: 200px;
+            display: inline-block;
+            padding-left: 10px;
+            word-break: break-all;/*可以中英文在一行*/
+        }
+        .itemSingle .itemPeople{
+            margin: 31px auto;
+            position: relative;
+        }
+
+        .itemSingle .itemPeople:after{
+            content: '';
+            width: 210px;
+            height: 1px;
+            background: grey;
+            position: absolute;
+            top:40px;
+            left: 26px;
+        }
+        .itemPeople span:first-child{
+            color: orange;
+            font-size: 20px;
+            margin-right: 3px;
+        }
+        .itemPeople span:last-child{
+            color: #000;
+            font-size: 18px;
+        }
+
+        .textHide{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body ng-app="app">
+<div ng-controller="mainCon">
+    <div class="left">
+        <ul>
+            <li>可分期</li>
+            <li>客户分组</li>
+            <li>主动营销</li>
+            <li>主系统管理</li>
+        </ul>
+    </div>
+    <div class="content">
+        <!--<div class="main">-->
+            <ul >
+                <li ng-repeat="item in groupData">
+                    <div class="itemSingle">
+                        <p class="img">
+                             <img src="{{item.src}}" width="20" height="20">
+                        </p>
+
+                        <p class="itemName">{{item.groupName}}</p>
+                        <p class="itemPeople"><span>{{item.people}}</span><span>人</span></p>
+                        <button>创建营销活动</button>
+                    </div>
+                </li>
+            </ul>
+       <!-- </div>-->
+        <div class="tree">
+            <ol>
+                <li>可分期</li>
+                <li>客户分组</li>
+                <li>主动营销</li>
+                <li>主系统管理</li>
+            </ol>
+        </div>
+    </div>
+
+</div>
+<script>
+    angular.module("app", [])
+            .controller("mainCon", function ($scope) {
+                $scope.groupData = [
+                    {
+                        "groupId": 12301,
+                        "groupName": "我是采蘑菇的小姑娘nihadewo是吧",
+                        "people": 200,
+                        "shop": "淘宝",
+                        "type": "订单查询",
+                        "src": "34",
+                    },
+                    {
+                        "groupId": 12302,
+                        "groupName": "元素中的图片元素制作为响应式的",
+                        "people": 20003,
+                        "shop": "淘宝",
+                        "type": "属性查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12303,
+                        "groupName": "要注意：flexbox天生就是具有响应式效果，这里的CSS只",
+                        "people": 6789,
+                        "shop": "当当",
+                        "type": "活动查询","src": "55",
+                    },
+                    {
+                        "groupId": 12304,
+                        "groupName": "此去经年应是良辰美景虚设更欲与何人说",
+                        "people": 8907656,
+                        "shop": "淘宝",
+                        "type": "订单查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12305,
+                        "groupName": "这里是分群的名称常显15个字",
+                        "people": 876,
+                        "shop": "京东",
+                        "type": "订单查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12306,
+                        "groupName": "本项目默认将组件（components）",
+                        "people": 89,
+                        "shop": "一号店",
+                        "type": "订单查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12307,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 452222,
+                        "shop": "亚马逊",
+                        "type": "活动查询","src": "55",
+                    },
+                    {
+                        "groupId": 12308,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 530000,
+                        "shop": "一号店",
+                        "type": "订单查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12309,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 23,
+                        "shop": "淘宝",
+                        "type": "属性查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12310,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 2400088,
+                        "shop": "淘宝",
+                        "type": "订单查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12311,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 211883,
+                        "shop": "一号店",
+                        "type": "活动查询",
+                        "src": "55",
+                    },
+                    {
+                        "groupId": 12312,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 200037685,
+                        "shop": "当当",
+                        "type": "订单查询",
+                        "src": "55",
+                    }
+                ];
+                //千分制显示
+                $scope.format=function (num) {
+                    return (num + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+                }
+
+                angular.forEach($scope.groupData,function (v) {
+                    v.people=$scope.format(v.people);
+                    if(v.groupName.length>20){
+                        $(".itemName").addClass("textHide")
+                    }
+                    console.log(v.groupName.length)
+                });
+
+
+
+
+            })
+</script>
+</body>
+</html>

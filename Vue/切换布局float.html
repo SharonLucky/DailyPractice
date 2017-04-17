@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>切换布局good</title>
+    <script src="http://cdn.staticfile.org/angular.js/1.2.10/angular.min.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding:0
+        }
+        .clearfix:before, .clearfix:after { content:""; display:table; }
+        .clearfix:after { clear: both; }
+        .clearfix { zoom: 1; }
+        body{
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+        .left{
+            width: 150px;
+            background: #ededed;
+            height: 500px;
+            position: absolute;
+        }
+        .content{
+            border: 1px solid rosybrown;
+            margin-left:200px;
+            min-width: 1042px;
+        }
+        .content .main{
+            /*border: 1px solid #2ABF9E;*/
+           /* display: inline-block;去除之后样式ok*/
+            margin:10px;
+            width:78%;
+            min-width: 876px;
+        }
+        .tree{
+            border: 1px solid #DBDBDB;
+            display: inline-block;
+          /*  width: 175px;*/
+            width:10%;
+            height: 500px;
+            background: #f8f8f8;
+           /* position: absolute;
+            right:20px;*/
+        }
+
+        .main ul li{
+            list-style: none;
+            border: 1px solid darkseagreen;
+            width: 257px;
+            height:170px;
+            margin:12px;
+            float:left
+        }
+        .main ul li .itemSingle{
+            border: 1px solid rebeccapurple;
+            width:100%;
+            height:100%;
+            text-align: center;
+        }
+        .itemSingle .itemName{
+            margin:10px;
+            border: 1px solid red;
+           height: 40px;
+        }
+        .itemSingle .itemPeople{
+            margin: 31px auto;
+            position: relative;
+        }
+        .itemSingle .itemPeople:after{
+            content: '';
+            width: 210px;
+            height: 1px;
+            background: grey;
+            position: absolute;
+            top: 46px;
+            left: 29px;
+        }
+        .itemPeople span:first-child{
+            color: orange;
+            font-size: 20px;
+            margin-right: 3px;
+        }
+        .itemPeople span:last-child{
+            color: #000;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body ng-app="app">
+<div ng-controller="mainCon">
+    <div class="left">
+        <ul>
+            <li>可分期</li>
+            <li>客户分组</li>
+            <li>主动营销</li>
+            <li>主系统管理</li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="main">
+            <ul style="float: left">
+                <li ng-repeat="item in groupData">
+                    <div class="itemSingle">
+                        <p class="itemName">{{item.groupName}}</p>
+                        <p class="itemPeople"><span>{{item.people}}</span><span>人</span></p>
+                        <button>创建营销活动</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tree">
+            <ul>
+                <li>可分期</li>
+                <li>客户分组</li>
+                <li>主动营销</li>
+                <li>主系统管理</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<script>
+    angular.module("app", [])
+            .controller("mainCon", function ($scope) {
+                $scope.groupData = [
+                    {
+                        "groupId": 12301,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 200,
+                        "shop": "淘宝",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12302,
+                        "groupName": "我是采蘑菇的小姑娘xfvgxdfvdfsv",
+                        "people": 20003,
+                        "shop": "淘宝",
+                        "type": "属性查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12303,
+                        "groupName": "我是采蘑菇的小姑娘dsvd",
+                        "people": 6789,
+                        "shop": "当当",
+                        "type": "活动查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12304,
+                        "groupName": "此去经年应是良辰美景虚设更欲与何人说",
+                        "people": 8907656,
+                        "shop": "淘宝",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12305,
+                        "groupName": "这里是分群的名称常显15个字",
+                        "people": 876,
+                        "shop": "京东",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12306,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 89,
+                        "shop": "一号店",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12307,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 452222,
+                        "shop": "亚马逊",
+                        "type": "活动查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12308,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 530000,
+                        "shop": "一号店",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12309,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 23,
+                        "shop": "淘宝",
+                        "type": "属性查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12310,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 2400088,
+                        "shop": "淘宝",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12311,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 211883,
+                        "shop": "一号店",
+                        "type": "活动查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    },
+                    {
+                        "groupId": 12312,
+                        "groupName": "我是采蘑菇的小姑娘",
+                        "people": 200037685,
+                        "shop": "当当",
+                        "type": "订单查询",
+                        "src": "http://s.click.taobao.com/t?e=m%3D2%26s%3DoLFpGquYKBccQipKwQzePCperVdZeJviK7Vc7tFgwiFRAdhuF14FMR76hnedCKIn5x%2BIUlGKNpVoVxuUFnM6iMUjUj9sJ%2FOjahL7L63x9mjftH4xLj0mLKUuZxIcp9pfUIgVEmFmgnbDX0%2BHH2IEVa7A5ve%2FEYDnFveQ9Ld2jopwTqWNBsAwm%2BIKl4JSR4lzxgxdTc00KD8%3D",
+                    }
+                ];
+
+            })
+</script>
+</body>
+</html>

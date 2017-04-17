@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+</head>
+<body>
+<div>
+    <ul>
+        <li>HTML专区</li>
+        <li class="js">Javascript专区</li>
+        <li>Div+Css专区</li>
+        <li>Jquery专区</li>
+    </ul>
+    <ul>
+        <li>字体要变蓝色了</li>
+    </ul>
+</div>
+<script>
+    var context = { foo: "bar" };
+    function returnFoo () {
+        return this.foo;
+    }
+    //returnFoo(); // => undefined
+    var bound = returnFoo.bind(context);
+    bound(); // => "bar"
+
+
+    $(document).ready(function(){
+        $("ul").filter(function(index){
+            return $(".js",this).length==0;
+        }).css("color","blue")
+    })
+
+</script>
+</body>
+</html>

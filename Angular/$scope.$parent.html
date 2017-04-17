@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://cdn.staticfile.org/angular.js/1.2.10/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller='parentctrl'>
+    <div ng-controller='sonctrl'>
+        <my-site site="http://www.cnblogs.com/cunjieliu"><div>雷锋叔叔的博客</div></my-site>
+    </div>
+</div>
+<script>
+    var app = angular.module('myApp',[]);
+    app.controller('sonctrl',function($scope){
+        $scope.title = 'hello son';
+    });
+    app.controller('parentctrl',function($scope){
+        $scope.title = 'hello parent';
+    });
+    app.directive('mySite', function () {
+        return {
+            restrict: 'EA',
+            transclude: true,
+            controller:
+                    function ($scope, $element,$attrs,$transclude,$log) {
+                        var a = $transclude();
+                        $element.append(a);
+                        $log.info($scope.title);
+                        $log.info($scope.$parent.title);
+                    }
+        };
+    });
+</script>
+</body>
+</html>

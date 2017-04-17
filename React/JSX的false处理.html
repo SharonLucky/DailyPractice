@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../../commonJs/react.js"></script>
+    <script src="../../commonJs/react-dom.js"></script>
+    <script src="../../commonJs/browser.min.js"></script>
+    <script src="../../commonJs/jquery-2.1.1.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    ReactDOM.render(
+            <div>
+                <p>被渲染成 id="false":</p>
+                <div id={false}></div>
+
+                <p>input value 的值将会是 "false" 字符串</p>
+                <input value={false}/>
+
+                <p>没有子节点</p>
+                <div>{false}</div>
+            </div>
+            ,
+            document.getElementById('example')
+    );
+</script>
+</body>
+</html>

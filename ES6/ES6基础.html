@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*正如其它语言中的for/foreach语句一样，for-of*循环语句通过方法调用来遍历各种集合*。数组、Maps对象、Sets对象以及其它在我们讨论的对象有一个共同点，它们都有一个迭代器方法。*/
+    var arr = [1, 2, 3, 4, 5];
+    for (var val of arr) {
+        console.log(val)
+    }
+
+    function* fibs() {
+        var a = 0;
+        var b = 1;
+        while (true) {
+            yield a;
+            [a, b] = [b, a + b];
+        }
+    }
+    var [first, second, third, fourth, fifth, sixth] = fibs();
+    console.log(sixth);// 5
+
+    /*-----------------解构-----------------*/
+    var rootA = {name: "rootA"};
+    var rootB = {name: "rootB"};
+    var {name:nameA}=rootA;
+    var {name:nameB}=rootB;
+    console.log(nameA + nameB);//rootA rootB
+
+    var {foo, too}={foo: "tom", too: "jack"};
+    console.log(foo + too);//tom jack
+
+    var complicatedObj = {
+        arrayProp: [
+            "Zapp",
+            {second: "Brannigan"}
+        ]
+    };
+    var {arrayProp: [first, {second}]} = complicatedObj;
+    console.log(first);
+    // "Zapp"
+    console.log(second);
+    // "Brannigan"
+
+    var {missing}={};
+    console.log(missing);//undefined
+    //{ blowUp } = { blowUp: 10 }; Syntax error 语法错误
+    // ({ safe } = {}); No errors 没有语法错误
+
+    /*-----------------Map:[key,value]键值对-----------------*/
+    var map = new Map();
+    map.set('aaa', "first");
+    map.set('bbb', "second")
+    for ([key, value] of map) {
+        console.log(key + ":" + value);
+    }
+    for ([key] of map) {
+    }
+    for ([, value] of map) {
+        console.log(value)
+    }
+    var mapObj = new Map([["text1", "good"], ["check1", "true"]]);
+    mapObj.set("text", "good")
+    mapObj.set("check", "true")
+    console.log(mapObj.size)
+    console.log(mapObj)
+    console.log(mapObj.has("check"))//has(key) true
+    console.log(mapObj.has("check2"))//false
+    console.log(mapObj.keys())
+    console.log(mapObj.values())
+    console.log(mapObj.entries())
+
+    /*-----------------Set:一个Set是一群值的集合。它是可变的，能够增删元素。不包含相同元素-------------------}*/
+    var flag = new Set([1, 2, 3]);
+    var flag1 = new Set("good sunny");
+    console.log(flag.size)
+    console.log(flag1.size)
+    console.log(flag.has(2))
+    console.log(flag1.has("o"))
+    flag.add(4);
+    flag1.add(" day");
+    console.log(flag)
+    console.log(flag1)
+
+    /*-----------代理---------*/
+    var target = {}, handle = {};
+    var proxy = new Proxy(target, handle);
+    proxy.color = "red";
+    console.log(target.color);
+
+    //句柄对象的方法可以覆写任意代理的内部方法。举个例子，你可以定义一个handler.set()方法来拦截所有给对象属性赋值的行为：
+    var target1 = {}, handle1 = {
+        set: function (target, key, value, reveice) {
+            throw  new Error("请不要赋值！")
+        }
+    };
+    var proxy = new Proxy(target1, handle1);
+    proxy.name = "mingzi";
+
+    /*-----------class---------*/
+    var proto = {
+        value: 4, method(){
+            return 14;
+        }
+    }
+    var obj = Object.create(proto);
+    obj.value;//4
+
+    //继承
+    class Shape{
+        constructor(color){
+            this._color=color;
+        }
+    }
+    class Circle extends Shape{
+        constructor(color,radius){
+            super(color);
+            this._radius=radius;
+        }
+    }
+
+    //new target
+   /* class foo{
+        constructor() {
+            return new.target;
+        }
+    }
+    class bar extends foo{
+        constructor(){
+            super()
+        }
+    }
+    new foo();
+    new bar();*/
+
+</script>
+</body>
+</html>
